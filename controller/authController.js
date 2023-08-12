@@ -37,6 +37,7 @@ const login = async (req, res) => {
           maxAge: 24 * 60 * 60 * 1000, //24hr
 
           httpOnly: true, //  not able to modify  the cookie in client side
+          path: "/",
         };
 
         res.cookie("token", token, cookieOption);
@@ -67,11 +68,11 @@ const getUser = async (req, res) => {
 
   try {
     const userData = await userModel.findOne({ username });
-    
+
     if (!userData) {
-        return res.status(404).send({ msg: "User not found" });
-      }
-  
+      return res.status(404).send({ msg: "User not found" });
+    }
+
     res.status(200).send({
       msg: "Success",
       data: userData,
